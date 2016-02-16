@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Guney aiyage bajaw daana kabarey!</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <ul id="messages">
+      <ul>
+      {% for msg in data %}
+          <li>{{ msg }}</li>
+      {% endfor %}
+      </ul>
+    </ul>
+    <form action="." method="POST">
+      <input name="text" type="text" autocomplete="off" /><button>Send</button>
+    </form>
+  </body>
+</html>
