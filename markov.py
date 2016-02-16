@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import re
 import random
@@ -11,6 +12,7 @@ class Markov:
         self.mapping = {}
         self.starts = []
         filename = 'all.txt'
+        self.backupPhrases = ['මට තෙරුනේ නෑ', 'ඈ?']
         self.markovLength = 1
         self.buildMapping(self.wordlist(filename), self.markovLength)
 
@@ -60,7 +62,10 @@ class Markov:
         index = random.random()
         # Shorten prevList until it's in mapping
         while self.toHashKey(prevList) not in self.mapping:
-            prevList.pop(0)
+            if prevList:
+                prevList.pop(0)
+            else:
+                return None
         # Get a random word from the mapping, given prevList
         for k, v in self.mapping[self.toHashKey(prevList)].iteritems():
             sum += v
@@ -82,6 +87,8 @@ class Markov:
         while (curr not in "."):
             # print 'prevList', prevList
             curr = self.next(prevList)
+            if not curr:
+                return random.choice(self.backupPhrases).decode('utf-8')
             prevList.append(curr)
             # if the prevList has gotten too long, trim it
             if len(prevList) > markovLength:

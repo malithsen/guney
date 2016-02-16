@@ -15,9 +15,9 @@ def main():
 @app.route('/', methods=['POST'])
 def process():
     text = request.form['text']
-    messages.append(text)
+    messages.append('you: ' + text)
     response = mark.main(text)
-    messages.append(response)
+    messages.append('Markov: ' + response)
     return render_template("index.html", data=messages)
 
 if __name__ == "__main__":
