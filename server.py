@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 from flask import Flask
 from flask import request
 from flask import render_template
@@ -17,7 +20,7 @@ def process():
     text = request.form['text']
     messages.append('you: ' + text)
     response = mark.main(text)
-    messages.append('Markov: ' + response)
+    messages.append('ගුණේ: '.decode('utf-8') + response)
     return render_template("index.html", data=messages)
 
 if __name__ == "__main__":
