@@ -22,7 +22,6 @@ def main():
 def process():
     data = json.loads(request.data)
     text = data['text']
-    print text
     response = mark.main(text)
     response = 'ගුණේ: '.decode('utf-8') + response
     response = {'response': response}
