@@ -3,6 +3,8 @@
   <head>
     <title>ගුණේ අය්යගෙ බජව් දාන කාඹරේ!</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='jquery-1.12.0.min.js') }}"> </script>
+    <script src="{{ url_for('static', filename='main.js') }}"> </script>
   </head>
   <body>
     <ul id="messages">
@@ -12,8 +14,8 @@
       {% endfor %}
       </ul>
     </ul>
-    <form action="." method="POST">
-      <input name="text" type="text" autocomplete="off" /><button>Send</button>
+    <form action="/chat" method="POST">
+      <input id="chatbox" name="text" type="text" autocomplete="off" type="button" /><button>Send</button>
     </form>
   </body>
 </html>

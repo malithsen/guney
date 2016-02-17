@@ -2,9 +2,11 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask
+from flask import jsonify
 from flask import request
 from flask import render_template
 import os
+import json
 import markov
 
 app = Flask(__name__)
@@ -14,15 +16,17 @@ mark = markov.Markov()
 
 @app.route("/")
 def main():
-    return render_template("index.html")
-
-@app.route('/', methods=['POST'])
-def process():
-    text = request.form['text']
-    messages.append('you: ' + text)
-    response = mark.main(text)
-    messages.append('ගුණේ: '.decode('utf-8') + response)
     return render_template("index.html", data=messages)
+
+@app.route('/chat', methods=['POST'])
+def process():
+    data = json.loads(request.data)
+    text = data['text']
+    print text
+    response = mark.main(text)
+    response = 'ගුණේ: '.decode('utf-8') + response
+    response = {'response': response}
+    return jsonify(**response)
 
 if __name__ == "__main__":
     app.debug = True
